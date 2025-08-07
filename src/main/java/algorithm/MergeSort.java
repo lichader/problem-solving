@@ -30,8 +30,13 @@ public class MergeSort {
 
         int[] input5 = {12, 34, 25, 21, 22, 33, 25, 32};
         int[] sortedArray5 = mergeSort.mergeSort(input5);
-        int[] expected5 = {12, 21, 22, 25, 25, 32, 32, 34};
+        int[] expected5 = {12, 21, 22, 25, 25, 32, 33, 34};
         assertEquals(expected5, sortedArray5);
+
+        int[] input6 = {1,0,1,2};
+        int[] sorted6 = mergeSort.mergeSort(input6);
+        int[] expected6 = {0,1,1,2};
+        assertEquals(expected6, sorted6);
     }
 
     public int[] mergeSort(int[] array) {
@@ -44,13 +49,16 @@ public class MergeSort {
         int half =  n / 2;
 
         int[] left = new int[half];
-        System.arraycopy(array, 0, left, 0, half);
+        for (int index = 0; index < half; index++) {
+            left[index] = array[index];
+        }
         System.out.println(Arrays.toString(left));
 
         int[] right = new int[n - half];
-        System.arraycopy(array, half, right, 0, right.length);
+        for (int index=0; index < right.length; index++) {
+            right[index] = array[index+half];
+        }
         System.out.println(Arrays.toString(right));
-
         left = mergeSort(left);
         right = mergeSort(right);
 
