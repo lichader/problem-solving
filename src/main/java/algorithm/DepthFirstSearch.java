@@ -3,8 +3,10 @@ package algorithm;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
-public class BreadthFirstSearch {
+public class DepthFirstSearch {
+
     public static void main(String[] args) {
         var v0 = new Vertex(0);
         var v1 = new Vertex(1);
@@ -13,34 +15,32 @@ public class BreadthFirstSearch {
         var v4 = new Vertex(4);
         var v5 = new Vertex(5);
         var v6 = new Vertex(6);
+        var v7 = new Vertex(7);
+        var v8 = new Vertex(8);
 
         v0.getNeighbors().addAll(Arrays.asList(v1, v5, v6));
         v1.getNeighbors().addAll(Arrays.asList(v3, v4, v5));
         v4.getNeighbors().addAll(Arrays.asList(v2, v6));
-        v6.getNeighbors().add(v0);
+        v6.getNeighbors().addAll(Arrays.asList(v0, v7));
+        v7.getNeighbors().add(v8);
 
-        var algorithm = new Algorithm();
-        algorithm.traverse(v0);
+        var dfs = new DepthFirstSearch();
+        dfs.traverse(v0);
     }
 
-    private static class Algorithm {
+    void traverse(Vertex start) {
+        var stack = new Stack<Vertex>();
+        stack.push(start);
 
-        public void traverse(Vertex start) {
-            var queue = new LinkedList<Vertex>();
+        while (!stack.isEmpty()) {
+            var node = stack.pop();
 
-            queue.push(start);
-
-            while (!queue.isEmpty()) {
-                var node = queue.pop();
-
-                if (!node.isVisited()) {
-                    System.out.println("Visiting vertex: " + node.getValue());
-                    node.setVisited(true);
-                    node.getNeighbors().forEach(queue::push);
-                }
+            if (!node.isVisited()) {
+                System.out.println("Visiting vertex: " + node.getValue());
+                node.setVisited(true);
+                stack.addAll(node.getNeighbors());
             }
         }
-
     }
 
     static final class Vertex {
@@ -71,5 +71,4 @@ public class BreadthFirstSearch {
     }
 
 }
-
 
