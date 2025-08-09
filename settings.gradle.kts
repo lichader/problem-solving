@@ -1,1 +1,1 @@
-rootProject.name = "technical-interview"
+rootProject.name = "problem-solving"
