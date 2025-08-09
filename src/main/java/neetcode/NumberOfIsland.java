@@ -4,14 +4,14 @@ import java.util.LinkedList;
 
 public class NumberOfIsland {
 
-    public int result(String[][] input) {
-        if (input.length == 0) {
+    public int result(char[][] grid) {
+        if (grid.length == 0) {
             return 0;
         }
 
-        int row = input.length;
+        int row = grid.length;
         System.out.println("rows: " + row);
-        int col = input[0].length;
+        int col = grid[0].length;
         System.out.println("cols: " + col);
 
         int numberOfIsland = 0;
@@ -20,7 +20,7 @@ public class NumberOfIsland {
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (input[i][j].equals("1") && !visited[i][j]) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
                     numberOfIsland++;
                     System.out.println("Found island [" + i + "," + j + "]");
 
@@ -30,8 +30,8 @@ public class NumberOfIsland {
                     while (!queue.isEmpty()) {
                         var node = queue.pop();
 
-                        var currentCol = node.col;
-                        var currentRow = node.row;
+                        var currentCol = node.col();
+                        var currentRow = node.row();
                         System.out.println("Checking node [" + currentRow + "," + currentCol + "]");
 
                         if (visited[currentRow][currentCol]) {
@@ -49,7 +49,7 @@ public class NumberOfIsland {
                         // check left cell
                         if (left >= 0
                                 && !visited[currentRow][left]
-                                && input[currentRow][left].equals("1")) {
+                                && grid[currentRow][left] == '1') {
                             System.out.println("Found left island [" + left + "," + currentRow + "]");
                             queue.push(new Cell(currentRow, left));
                         }
@@ -57,14 +57,14 @@ public class NumberOfIsland {
                         // check right cell
                         if (right < col
                                 && !visited[currentRow][right]
-                                && input[currentRow][right].equals("1")) {
+                                && grid[currentRow][right] == '1') {
                             System.out.println("Found right island [" + right + "," + currentRow + "]");
                             queue.push(new Cell(currentRow, right));
                         }
 
                         if (up >= 0
                                 && !visited[up][currentCol]
-                                && input[up][currentCol].equals("1")) {
+                                && grid[up][currentCol] == '1') {
                             System.out.println("Found above island [" + currentCol + "," + up + "]");
                             queue.push(new Cell(up, currentCol));
                         }
@@ -72,7 +72,7 @@ public class NumberOfIsland {
                         // check down
                         if (down < row
                                 && !visited[down][currentCol]
-                                && input[down][currentCol].equals("1")) {
+                                && grid[down][currentCol] == '1') {
                             System.out.println("Found below island [" + currentCol + "," + down + "]");
                             queue.push(new Cell(down, currentCol));
                         }
@@ -87,14 +87,6 @@ public class NumberOfIsland {
     }
 }
 
-class Cell {
-
-    final int col;
-    final int row;
-
-    public Cell(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
+record Cell(int row, int col) {
 }
 

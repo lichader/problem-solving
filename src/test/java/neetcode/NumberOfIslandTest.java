@@ -11,11 +11,11 @@ class NumberOfIslandTest {
 
     @Test
     void inputOne() {
-        var input = new String[][]{
-                {"0", "1", "1", "1", "0"},
-                {"0", "1", "0", "1", "0"},
-                {"1", "1", "0", "0", "0"},
-                {"0", "0", "0", "0", "0"}
+        var input = new char[][]{
+                {'0', '1', '1', '1', '0'},
+                {'0', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}
         };
 
         assertEquals(1, subject.result(input));
@@ -23,36 +23,36 @@ class NumberOfIslandTest {
 
     @Test
     void inputTwo() {
-        var input = new String[][]{
-                {"1", "1", "0", "0", "1"},
-                {"1", "1", "0", "0", "1"},
-                {"0", "0", "1", "0", "0"},
-                {"0", "0", "0", "1", "1"}
+        var input = new char[][]{
+                {'1', '1', '0', '0', '1'},
+                {'1', '1', '0', '0', '1'},
+                {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '1', '1'}
         };
         assertEquals(4, subject.result(input));
     }
 
     @Test
     void inputThree() {
-        var input = new String[][]{
-                {"1", "1", "0"},
-                {"1", "1", "1"},
-                {"0", "0", "1"},
-                {"0", "0", "0"},
-                {"1", "0", "1"},
+        var input = new char[][]{
+                {'1', '1', '0'},
+                {'1', '1', '1'},
+                {'0', '0', '1'},
+                {'0', '0', '0'},
+                {'1', '0', '1'},
         };
         assertEquals(3, subject.result(input));
     }
 
     @Test
     void edgeCase() {
-        var input = new String[][]{};
+        var input = new char[][]{};
         assertEquals(0, subject.result(input));
     }
 
     @Test
     void edgeCaseTwo() {
-        var input = new String[][]{{"1", "1", "0", "1"}};
+        var input = new char[][]{{'1', '1', '0', '1'}};
         assertEquals(2, subject.result(input));
     }
 }
