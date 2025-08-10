@@ -17,8 +17,7 @@ public class BinarySearch {
             return -1;
         }
 
-
-        int middle = end / 2;
+        int middle = start + (end - start) / 2;
 
         int newStart = start;
         int newEnd = end;
